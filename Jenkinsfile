@@ -8,6 +8,13 @@ pipeline {
   triggers {
     pollSCM('H/2 * * * *')
   }
+      stage('Security scan') {
+      steps {
+        bat '''
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest image --severity HIGH,CRITICAL --ignore-unfixed --no-progress --exit-code 0 %APP%:%TAG%
+        '''
+      }
+    }
   stages {
 
     stage('Checkout') {
