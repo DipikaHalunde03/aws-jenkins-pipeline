@@ -1,0 +1,8 @@
+services:
+  web:
+    build: .
+    image: aws-devops-webapp:v1
+    container_name: devops-webapp
+    ports:
+      - "3000:80"
+    restart: unless-stopped

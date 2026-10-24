@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ship It – CI/CD Pipeline Playground</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <header class="hero">
+    <h1>Watch a commit become a live website.</h1>
+    <p>AWS DevOps Pipeline : GitHub, Jenkins, Docker, Amazon ECR and Amazon ECS. Run the pipeline below, or break it on purpose.</p>
+    <div class="controls">
+      <button id="run" class="btn">Run pipeline</button>
+      <label class="switch"><input type="checkbox" id="fail"><span></span>Make the tests fail</label>
+    </div>
+  </header>
+
+  <section class="board" aria-label="Pipeline">
+    <div class="track" id="track">
+      <div class="crate" id="crate" aria-hidden="true"><i></i><i></i></div>
+    </div>
+    <div class="terminal" role="log" aria-live="polite"><pre id="log">$ waiting for a commit…</pre></div>
+    <p class="result" id="result"></p>
+  </section>
+
+  <section>
+    <h2>Three tiers, three AWS services</h2>
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <div class="panel" id="panel" role="tabpanel"></div>
+  </section>
+
+  <section class="two">
+    <div>
+      <h2>What will this cost me?</h2>
+      <p class="hint">One small Fargate task (0.25 vCPU, 0.5 GB) plus a public IPv4 address. Estimate for us-east-1; check the AWS Pricing Calculator for your region.</p>
+      <label class="slider">Task runs for <b id="hrsOut">2 hours</b>
+        <input type="range" id="hrs" min="1" max="72" value="2">
+      </label>
+      <div class="price"><span id="cost">$0.03</span><small>for this demo</small></div>
+      <div class="warn">If you forget to delete it for 30 days: <b id="forgot">$12.48</b></div>
+    </div>
+    <div>
+      <h2>Cleanup checklist</h2>
+      <div class="bar"><div id="barFill"></div></div>
+      <p class="hint" id="cleanMsg"></p>
+      <ul class="check" id="check"></ul>
+    </div>
+  </section>
+
+  <footer>Static HTML, CSS and JavaScript, served by Nginx in a Docker container.</footer>
+</main>
+<script src="script.js"></script>
+</body>
+</html>
