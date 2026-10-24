@@ -5,7 +5,9 @@ pipeline {
     APP = 'aws-devops-webapp'
     TAG = "${env.BUILD_NUMBER}"
   }
-
+  triggers {
+    pollSCM('H/2 * * * *')
+  }
   stages {
 
     stage('Checkout') {
