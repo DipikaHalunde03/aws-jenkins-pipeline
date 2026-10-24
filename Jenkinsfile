@@ -50,5 +50,21 @@ pipeline {
         '''
       }
     }
+
+        stage('Push to Docker Hub') {
+      steps {
+        withCredentials([usernamePassword(credentialsId: 'dockerhub-creds',
+                         usernameVariable: 'DH_USER', passwordVariable: 'DH_TOKEN')]) {
+          bat 'echo %DH_TOKEN%| docker login -u %DH_USER% --password-stdin'
+          bat 'docker tag %APP%:%TAG% %DH_USER%/%APP%:%TAG%'
+          bat 'docker tag %APP%:%TAG% %DH_USER%/%APP%:latest'
+          bat 'docker push %DH_USER%/%APP%:%TAG%'
+          bat 'docker push %DH_USER%/%APP%:latest'
+        }
+      }
+      post {
+        always { bat 'docker logout' }
+      }
+    }
   }
 }
