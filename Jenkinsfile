@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   environment {
-    APP = 'aws-devops-webapp'
+    APP = 'aws-jenkins-webapp'
     TAG = "${env.BUILD_NUMBER}"
   }
   triggers {
